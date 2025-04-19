@@ -1,10 +1,6 @@
 This Query is designed to hunt for any malicious instances of the Certutil utility via command-line parameters, where possibly a benign file format, such as a txt/png was encoded as part of obfuscation and later decoded as a final malicious payload like a batch or an executable file.
 
 ```bash
-(#event_simpleName=ProcessRollup2 AND ((ImageFileName=*certutil.exe OR FileName=certutil.exe OR OriginalFilename=CertUtil.exe) AND ((CommandLine="*encode*" OR CommandLine="*encodehex*" OR CommandLine="*decode*" OR CommandLine="*decodehex*") AND (CommandLine="*.acl*" OR CommandLine="*.exe*" OR CommandLine="*.dll*" OR CommandLine="*.bat*" OR CommandLine="*.doc*" OR CommandLine="*.gif*" OR CommandLine="*.jpeg*" OR CommandLine="*.jpg*" OR CommandLine="*.mp3*" OR CommandLine="*.pdf*" OR CommandLine="*.png*" OR CommandLine="*.ppt*" OR CommandLine="*.tmp*" OR CommandLine="*.xls*" OR CommandLine="*.xml*" OR CommandLine="*.zip*" OR CommandLine="*.txt*")))) 
-```
-OR 
-```bash
-((CommandHistory="*encode*" OR CommandHistory="*encodehex*" OR CommandHistory="*decode*" OR CommandHistory="*decodehex*") AND CommandHistory="*certutil*")
+(#event_simpleName=ProcessRollup2 AND ((ImageFileName=*certutil.exe OR FileName=certutil.exe OR OriginalFilename=CertUtil.exe) AND ((CommandLine="*encode*" OR CommandLine="*encodehex*" OR CommandLine="*decode*" OR CommandLine="*decodehex*") AND (CommandLine="*.acl*" OR CommandLine="*.exe*" OR CommandLine="*.dll*" OR CommandLine="*.bat*" OR CommandLine="*.doc*" OR CommandLine="*.gif*" OR CommandLine="*.jpeg*" OR CommandLine="*.jpg*" OR CommandLine="*.mp3*" OR CommandLine="*.pdf*" OR CommandLine="*.png*" OR CommandLine="*.ppt*" OR CommandLine="*.tmp*" OR CommandLine="*.xls*" OR CommandLine="*.xml*" OR CommandLine="*.zip*" OR CommandLine="*.txt*")))) OR ((CommandHistory="*encode*" OR CommandHistory="*encodehex*" OR CommandHistory="*decode*" OR CommandHistory="*decodehex*") AND CommandHistory="*certutil*")
 |table([@timestamp,#event_simpleName,ComputerName,UserName,GrandParentBaseFileName,ParentBaseFileName,OriginalFilename,FileName,CommandLine,CommandHistory])
 ```
