@@ -1,6 +1,5 @@
-///
 //Tracing the ProcessId of a Process / File which is writting atleast 1 each EXE and DLL to same Path, Doing the Process Original name masquarading and atleast 1 File Author name is Microsoft in "DLL-Filewrite", tracking throughtout as SusProcessID (prepending aid to ContextProcessId)
-
+```
 defineTable(query={#event_simpleName=/(PeFileWritten)/iF 
 |lowercase("FileName")
 |lowercase("OriginalFilename")
@@ -101,4 +100,4 @@ CommandLine=* |regex("\"[^\"]+\"\\s+\"(?P<FullPath>[^\"]*\\\\)?", field=CommandL
 | ProcessStartTime:=ProcessStartTime*1000 |ProcessStartTime := formatTime("%e %b %Y %r", field=ProcessStartTime, locale=en_UAE, timezone="Asia/Dubai")
 | rename([[FilePath,FileWrittenPath],[CompanyName,"ExeAuthorCompanyName"],[ModuleLoadTelemetryClassification,"DllLoaded Files Signature"]])
 |drop([SusProcessID])
-///
+```
