@@ -97,6 +97,10 @@ CommandLine=* |regex("\"[^\"]+\"\\s+\"(?P<FullPath>[^\"]*\\\\)?", field=CommandL
 }
 }, include=[FileWriteFile,FileWriteFileSourceURL,FileWriteFileSource,ProcessStartTime,DLLSideLoadProcess,"DllLoaded Files",ModuleLoadTelemetryClassification,FileWriteParent,FilePath,FileWritten,SusHash,OriginalFilename,CompanyName,SusProcessID,ComputerName,UserName,"DllLoaded Files Count"], name="MOTW")
 |readFile(["Aggregation","MOTW"])
+|case{
+  FileWriteFileSourceURL!="*" |FileWriteFileSourceURL:=format(format="No URL Found", field=[]);
+  * 
+}
 |groupBy([ProcessStartTime,SusProcessID,ComputerName,UserName],function=([collect([FileWriteFileSourceURL,FileWriteFileSource,FileWriteParent,FilePath,FileWritten,OriginalFilename,CompanyName,DLLSideLoadProcess,"DllLoaded Files",ModuleLoadTelemetryClassification,SusHash,"DllLoaded Files Count"])]))
 | ProcessStartTime:=ProcessStartTime*1000 |ProcessStartTime := formatTime("%e %b %Y %r", field=ProcessStartTime, locale=en_UAE, timezone="Asia/Dubai")
 | rename([[FilePath,FileWrittenPath],[CompanyName,"ExeAuthorCompanyName"],[ModuleLoadTelemetryClassification,"DllLoaded Files Signature"]])
