@@ -1,5 +1,6 @@
-//Tracing the ProcessId of a Process / File which is writting atleast 1 each EXE and DLL to same Path, Doing the Process Original name masquarading and atleast 1 File Author name is Microsoft in "DLL-Filewrite", tracking throughtout as SusProcessID (prepending aid to ContextProcessId)
+Dll-Side Loading Detection Query for Crowdstrike Falcon NGSIEM
 ```
+//Tracing the ProcessId of a Process / File which is writting atleast 1 each EXE and DLL to same Path, Doing the Process Original name masquarading and atleast 1 File Author name is Microsoft in "DLL-Filewrite", tracking throughtout as SusProcessID
 defineTable(query={#event_simpleName=/(PeFileWritten)/iF 
 |lowercase("FileName")
 |lowercase("OriginalFilename")
