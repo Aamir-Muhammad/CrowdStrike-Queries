@@ -36,7 +36,7 @@ CommandLine=* |regex("\"[^\"]+\"\\s+\"(?P<FullPath>[^\"]*\\\\)?", field=CommandL
 }, include=[FileWriteFile,FileWriteFileSource,FileWriteParent,FilePath,FileWritten,SusHash,OriginalFilename,CompanyName,SusProcessID,ComputerName,UserName], name="DLL-Parent")
 
 // Then Tracing the DLL-side-Loading Process startup for "DLL-Parent", getting DLLSideLoadProcess, tracked as "DLLSideLoadProcess"
-|defineTable(query={#event_simpleName=/(ProcessRollup2)/iF |$ProcessTree()|rename(field="ProcessTree", as="DLLSideLoadProcess") 
+|defineTable(query={#event_simpleName=/(ProcessRollup2)/iF |DLLSideLoadProcess:=format(format="%s\n\t└-> %s", field=[ParentBaseFileName,FileName])
 |TargetProcessId:=format(format="%s%s", field=[aid,TargetProcessId])
 |ParentProcessId:=format(format="%s%s", field=[aid,ParentProcessId])
 |match(file="DLL-Parent", field=[ParentProcessId],column=[SusProcessID],strict=true,include=[FileWriteFile,FileWriteFileSource,FileWriteParent,FilePath,FileWritten,SusHash,OriginalFilename,CompanyName,SusProcessID,ComputerName,UserName])
