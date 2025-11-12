@@ -1,7 +1,5 @@
-
-// Kimsuky JS Dropper Hunting Query - CQL Version
-// Define C2 Domains, Suspicious Paths, LOLBins, and Suspicious Tasks
 ```
+// Kimsuky JS Dropper Hunting Query - CQL Version
 |case{
  #event_simpleName=DnsRequest (DomainName=/medianewsonline.com/iF OR DomainName=/iuh234.medianewsonline.com/iF)| IndicatorType := "Network Traffic";
  #event_simpleName=/FileWritten/iF FileName=/(Themes.js|L298306.tmp)$/iF TargetFileName=/APPDATA|temp|public/iF| IndicatorType := "File";
