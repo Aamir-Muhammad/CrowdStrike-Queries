@@ -1,6 +1,6 @@
 ```
 // References: https://www.koi.ai/incident/live-updates-sha1-hulud-the-second-coming-hundred-npm-packages-compromised
-//https://safedep.io/shai-hulud-second-coming-supply-chain-attack/
+// https://safedep.io/shai-hulud-second-coming-supply-chain-attack/
 |case{
     in(field="SHA256HashData", values=["a3894003ad1d293ba96d77881ccd2071446dc3f65f434669b49b3da92421901a", // setup_bun.js
     "62ee164b9b306250c1172583f138c9614139264f889fa99614903c12755468d0", // bun_environment.js
