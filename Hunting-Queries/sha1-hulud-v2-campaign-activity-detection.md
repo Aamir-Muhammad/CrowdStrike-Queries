@@ -1,4 +1,3 @@
-```
 // References: https://www.koi.ai/incident/live-updates-sha1-hulud-the-second-coming-hundred-npm-packages-compromised
 // https://safedep.io/shai-hulud-second-coming-supply-chain-attack/
 |case{
@@ -16,5 +15,4 @@
 }
 |$ProcessTree2()
 |groupBy([Analysis,ProcessTree,CommandLineTree,AppName,AppVendor,SHA256HashData],function=collect([ComputerName]))
-|select([Analysis,ComputerName,ProcessTree,CommandLineTree,SHA256HashData])
-```
+|select([Analysis,ComputerName,ProcessTree,CommandLineTree,AppName,AppVendor,SHA256HashData])
