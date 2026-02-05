@@ -16,7 +16,7 @@ ImageFileName=/\\(BluetoothService|system|loader1|loader2|s047t5g|ConsoleApplica
   OR (ProcessName=/ConsoleApplication.*\.exe/iF and DllLoadImageFileName=/clipc.dll/iF)| DetectionLogic := "Suspicious DLL SideLoading" | Indicator := DllLoadImageFileName | Risk := "HIGH"; 
 ImageFileName=/\\(u\.bat|conf\.c)$/i | DetectionLogic := "Suspicious Script/Code" | Indicator := ImageFileName | Risk := "MEDIUM";
 CommandLine=/curl.exe/iF CommandLine=/-F.*\.txt.*temp.sh/iF | DetectionLogic := "Exfiltration" | Indicator := CommandLine | Risk := "HIGH";
-CommandLine=/cmd.*\/c.*>.*.txt/iF CommandLine="whoami|tasklist|systeminfo|netstat -ano"| DetectionLogic := "Recon" | Indicator := CommandLine | Risk := "MEDIUM";
+CommandLine=/cmd.*\/c.*>.*.txt/iF CommandLine=/whoami|tasklist|systeminfo|netstat -ano/iF | DetectionLogic := "Recon" | Indicator := CommandLine | Risk := "MEDIUM";
 #event_simpleName=/Written/iF (FilePath=/\\ProShow\\load|\Bluetooth\\BluetoothService|\\Adobe\\Scripts/iF or ImageFileName=/\\Adobe\\Scripts\\alien.ini/iF)| DetectionLogic := "2dary Payload write" | Indicator := FileName | Risk := "MEDIUM";
 #event_simpleName=/ProcessAncestryInformation|Processrollup2/iF ParentBaseFileName=/^gup\.exe$/iF FileName!=/explorer.exe|^npp\..*\.Installer.*\.exe$/iF FileName=/update.*\.exe|AutoUpdater\.exe|curl\.exe|cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|rundll32\.exe/iF or FilePath=/\\Temp\\|\\tmp\\|AppData\\Local\\/iF| DetectionLogic := "Initial Malicious Execution" | Indicator := FileName | Risk := "HIGH";
 }
