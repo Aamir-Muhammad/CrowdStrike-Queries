@@ -14,7 +14,8 @@ defineTable(query={#event_simpleName=/(PeFileWritten)/iF
 // Exclusions FOr Edge Browser
 |OriginalFilename!=microsoftedgeupdate.exe OriginalFilename!=msedgeupdate.dll
 |groupBy([SusProcessID,FilePath],function=([collect([DllFileName,EXEFileName,SusHash,FileWritten,OriginalFilename,CompanyName]),count(DllFileName,as=DllC),count(EXEFileName,as=EXEC)]),limit=max)
-|DllC>=1 EXEC>=1 CompanyName=/Microsoft/iF 
+|DllC>=1 EXEC>=1 
+// |CompanyName=/Microsoft/iF //Optional but it can suppress some TP
 }, include=[FilePath,FileWritten,OriginalFilename,SusHash,DllFileName,EXEFileName,CompanyName,SusProcessID,ComputerName,UserName], name="DLL-Filewrite")
 
 // Then tracing the Parent File for files written operation in "DLL-Filewrite" getting FileWriteParent, tracked as "DLL-Parent"
@@ -105,4 +106,5 @@ CommandLine=* |regex("\"[^\"]+\"\\s+\"(?P<FullPath>[^\"]*\\\\)?", field=CommandL
 | ProcessStartTime:=ProcessStartTime*1000 |ProcessStartTime := formatTime("%e %b %Y %r", field=ProcessStartTime, locale=en_UAE, timezone="Asia/Dubai")
 | rename([[FilePath,FileWrittenPath],[CompanyName,"ExeAuthorCompanyName"],[ModuleLoadTelemetryClassification,"DllLoaded Files Signature"]])
 |drop([SusProcessID])
+|UserName!="*$"
 ```
