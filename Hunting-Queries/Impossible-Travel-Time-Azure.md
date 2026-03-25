@@ -2,7 +2,7 @@ Tracing Logins from two different countries with impossible travel times between
 ```
 in(field="#event_simpleName", values=[SsoApplicationAccess,SsoUserLogon])
 //Excluding Mobile Devices since VPN is widely used on mobile devices
-| ClientUserAgentString!=/ios /i and ClientUserAgentString!=/Safari/i and ClientUserAgentString!=/Android/i
+| ClientUserAgentString!=/ios /i and ClientUserAgentString!=/Android/i
 //Exclude your proxy's cloud CIDR (if any)
 | !cidr(SourceEndpointAddressIP4, subnet=["0.0.0.0/16"])
 //Concatinate the IP4 and IP6 Sources IP addresses into single varibale
