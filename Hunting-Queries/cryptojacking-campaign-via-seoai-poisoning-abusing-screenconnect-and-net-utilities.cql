@@ -1,7 +1,7 @@
 // Campaign: Cryptojacking via SEO/AI-poisoning → ScreenConnect → .NET process hollowing
 // Source: https://www.microsoft.com/en-us/security/blog/2026/05/26/poisoned-search-results-gpu-mining-cryptojacking-campaign-abusing-screenconnect-microsoft-net-utilities/
 // Author: Aamir Muhammad
-//  TABLE 1: autorun.dll sideload (anchor for time-window join) 
+//  TABLE 1: autorun.dll sideload
 defineTable(
     name  = "tbl_sideload",
     query = {
