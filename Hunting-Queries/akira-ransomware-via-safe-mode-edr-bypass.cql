@@ -3,7 +3,7 @@
 // Chain - SonicWall VPN spray -> RDP to DC -> AD enum -> WinRAR+s5cmd exfil -> AnyDesk C2 -> Safe Mode reboot -> akira.exe
 // Author: Aamir Muhammad
 event_platform = "Win"
-| #event_simpleName = /ProcessRollup2|SyntheticProcessRollup2|CreateService|ServiceStarted|RegGenericValueUpdate|SuspiciousRegAsepUpdate|NewExecutableWritten|PeFileWritten|NetworkConnectIP4|NetworkReceiveAcceptIP4|SensorEnteredSafemode|UserLogon/iF
+| #event_simpleName = /ProcessRollup2|SyntheticProcessRollup2|CreateService|ServiceStarted|RegGenericValueUpdate|SuspiciousRegAsepUpdate|NewExecutableWritten|PeFileWritten|NetworkConnectIP4|NetworkReceiveAcceptIP4|SensorEnteredSafemode|UserLogon|ActiveDirectory|SsoUserLogon|SsoApplicationAccess/iF or (#Vendor=microsoft AND #event.outcome=success)
 | case {
 
     // TTP 1 - AD enumeration with unlimited format output (Akira signature recon)
